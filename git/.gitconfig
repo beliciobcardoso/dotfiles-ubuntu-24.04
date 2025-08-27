@@ -1,3 +1,21 @@
 [user]
 	email = belloinfo@gmail.com
 	name = Belicio B Cardoso
+
+[core]
+    editor = nano
+    autocrlf = input
+    excludesfile = ~/.gitignore_global
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+
+[pull]
+	rebase = false
+
+[color]
+    ui = auto
+
+[init]
+    defaultBranch = main
