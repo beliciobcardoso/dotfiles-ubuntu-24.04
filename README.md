@@ -11,4 +11,16 @@ Clone o repositório:
 
 ```bash
 git clone https://github.com/belicio-cardoso/dotfiles-ubuntu-24.04.git ~/dotfiles-ubuntu-24.04
+```
+
+```bash
 cd ~/dotfiles-ubuntu-24.04
+```
+
+```bash
+chmod +x setup.sh
+```
+
+```bash
+./setup.sh
+```
