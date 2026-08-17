@@ -1,3 +1,10 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/home/belicio-cardoso/.oh-my-zsh/custom/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -107,12 +114,17 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias projetos='cd ~/Área\ de\ trabalho/Projetos'
-alias backend='cd ~/Área\ de\ trabalho/Projetos/Nova_Corrente/newChain-Server'
-alias frontend='cd ~/Área\ de\ trabalho/Projetos/Nova_Corrente/newChain-front'
+alias projetos='cd ~/Projetos'
+alias backend='cd ~/Projetos/Nova_Corrente/newChain-Server'
+alias frontend='cd ~/Projetos/Nova_Corrente/newChain-front'
 alias api='npm run start:api:dev'
+alias api-mobile='npm run start:dev api-mobile'
 alias task='npm run start:dev task-manager'
 alias real='npm run start:dev real-time-hub'
+alias upgrade='sudo apt update && sudo apt upgrade -y --allow-downgrades && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt autoclean'
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$ANDROID_HOME/platform-tools:$PATH
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -121,3 +133,26 @@ export NVM_DIR="$HOME/.nvm"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 PATH=~/.console-ninja/.bin:$PATH
+
+. "$HOME/.local/bin/env"
+
+# opencode
+export PATH=/home/belicio-cardoso/.opencode/bin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/belicio-cardoso/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/belicio-cardoso/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/belicio-cardoso/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/belicio-cardoso/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+source "$HOME/.cargo/env"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/belicio-cardoso/.local/bin:$PATH"
+
+# Atalho para o iReasoning MIB Browser
+alias mibbrowser='cd /home/belicio-cardoso/Projetos/mibbrowser && ./browser.sh'
+
+# direnv: carrega .envrc automaticamente ao entrar/sair de diretórios de projeto
+eval "$(direnv hook zsh)"

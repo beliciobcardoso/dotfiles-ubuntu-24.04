@@ -14,3 +14,10 @@ zsh/.zsh_history
 # Segredos
 .config/secrets/
 secrets/env
+
+# Backups gerados pelo setup.sh
+*.backup
+
+# Config local de ferramentas (por máquina, não faz parte do dotfile)
+.serena/
+.claude/settings.local.json

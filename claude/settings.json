@@ -1,0 +1,95 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk npx:*)",
+      "Bash(./node_modules/.bin/jest --testPathPattern=\"fieldPermission.interceptor.spec\" --no-coverage)",
+      "Bash(./node_modules/.bin/jest --testPathPatterns=\"fieldPermission.interceptor.spec\" --no-coverage)",
+      "Bash(./node_modules/.bin/jest --testPathPatterns=\"fieldEditPermission.interceptor.spec\" --no-coverage)",
+      "mcp__pencil"
+    ]
+  },
+  "model": "opus",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/home/belicio-cardoso/.claude/hooks/gsd-check-update.js\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/home/belicio-cardoso/.claude/hooks/gsd-context-monitor.js\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/home/belicio-cardoso/.claude/hooks/gsd-prompt-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/belicio-cardoso/.claude/hooks/rtk-rewrite.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node \"/home/belicio-cardoso/.claude/hooks/gsd-statusline.js\""
+  },
+  "enabledPlugins": {
+    "ralph-loop@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "ai-plugins@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "plugin-dev@claude-plugins-official": true,
+    "playground@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "qt-development-skills@claude-plugins-official": true,
+    "youdotcom-agent-skills@claude-plugins-official": true,
+    "redis-development@claude-plugins-official": true,
+    "dash0@claude-plugins-official": true,
+    "nvidia-skills@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "everything-claude-code": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/affaan-m/everything-claude-code.git"
+      }
+    }
+  },
+  "language": "pt-br",
+  "effortLevel": "low",
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true
+}
