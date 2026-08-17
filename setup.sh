@@ -12,7 +12,14 @@ FILES=(bash/.bashrc zsh/.zshrc vim/.vimrc git/.gitconfig)
 for file in "${FILES[@]}"; do
     src="$DOTFILES_DIR/$file"
     dest="$HOME/$(basename $file)"
-    
+
+    # Sem isso, um item de FILES que não existe no repo geraria um symlink quebrado
+    # e ainda renomearia o arquivo bom do $HOME para .backup.
+    if [ ! -e "$src" ]; then
+        echo "⏭  Ignorado (ausente no repo): $file"
+        continue
+    fi
+
     if [ -f "$dest" ] || [ -L "$dest" ]; then
         echo "📦 Backup de $dest para $dest.backup"
         mv "$dest" "$dest.backup"

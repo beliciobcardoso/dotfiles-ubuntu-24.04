@@ -5,3 +5,12 @@ coolify/env
 *.pem
 *_rsa
 .env
+
+# Histórico de shell: nunca em repo público (comandos, hosts, caminhos)
+.zsh_history
+zsh/.zsh_history
+.bash_history
+
+# Segredos
+.config/secrets/
+secrets/env
