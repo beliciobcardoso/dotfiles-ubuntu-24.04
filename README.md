@@ -40,8 +40,25 @@ Qualquer arquivo já existente no destino é preservado como `<arquivo>.backup`.
 | `claude/CLAUDE.md` | `~/.claude/CLAUDE.md` |
 | `claude/RTK.md` | `~/.claude/RTK.md` |
 | `claude/settings.json` | `~/.claude/settings.json` |
-| `claude/hooks/` | `~/.claude/hooks/` |
 | `claude/skills/coolify/` | `~/.claude/skills/coolify/` |
+
+---
+
+## 📦 Dependências (instalar antes do `setup.sh`)
+
+O `claude/settings.json` versionado referencia hooks em `~/.claude/hooks/`.
+Esse diretório **não é versionado** — quem o cria são as ferramentas abaixo.
+Instale-as em uma máquina nova, senão o Claude Code tentará executar hooks
+que não existem:
+
+| Ferramenta | Instalação | O que instala em `~/.claude/hooks/` |
+| --- | --- | --- |
+| GSD (`get-shit-done-cc`) | `npm i -g get-shit-done-cc` | `gsd-check-update.js`, `gsd-context-monitor.js`, `gsd-prompt-guard.js`, `gsd-statusline.js`, `gsd-workflow-guard.js` |
+| RTK | ver instalador do projeto | `rtk-rewrite.sh`, `.rtk-hook.sha256` |
+
+Ambas também reescrevem os blocos `hooks` e `statusLine` do `settings.json`
+com caminhos absolutos. Se o `$HOME` da outra máquina tiver outro nome de
+usuário, revise esses caminhos após instalar.
 
 ---
 
@@ -49,10 +66,12 @@ Qualquer arquivo já existente no destino é preservado como `<arquivo>.backup`.
 
 - **Segredos nunca são versionados.** Veja o `.gitignore`: tokens, chaves, `.env`,
   histórico de shell e `~/.claude/settings.local.json` ficam de fora.
-- **`claude/hooks/`** contém scripts instalados pelo plugin GSD e pelo RTK.
-  São versionados porque `claude/settings.json` os referencia por caminho absoluto —
-  sem eles, o Claude Code quebraria numa máquina nova. Ao atualizar GSD ou RTK,
-  recopie os hooks para o repo.
+- **`~/.claude/hooks/` não é versionado.** Os arquivos pertencem ao GSD (npm) e ao
+  RTK, que os reescrevem a cada atualização. Versioná-los criaria duas fontes de
+  verdade para o mesmo arquivo: o repo sobreporia a versão instalada pelo npm, e o
+  `gsd-check-update` — que compara a versão declarada dentro de cada hook com o
+  `VERSION` local — acusaria "stale hooks" em máquinas com outra versão do GSD.
+  Trate como `node_modules`: declare a dependência, não copie o código.
 - **Agentes e comandos do Claude** (`~/.claude/agents/`, `~/.claude/commands/`,
   `~/.claude/plugins/`) **não** são versionados: são reinstalados pelos próprios plugins.
 - `~/.zshrc` e `~/.gitconfig` contêm caminhos absolutos desta máquina

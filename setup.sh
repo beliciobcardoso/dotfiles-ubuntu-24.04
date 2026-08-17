@@ -59,9 +59,14 @@ done
 
 # Diretórios para link simbólico, no formato "origem:destino-relativo-ao-HOME".
 # Necessário porque o destino não fica na raiz do $HOME (ao contrário de FILES).
+#
+# ~/.claude/hooks/ NÃO entra aqui de propósito: seu conteúdo pertence ao npm
+# (get-shit-done-cc) e ao RTK, que reescrevem os arquivos a cada atualização.
+# Versioná-lo faria o repo sobrepor a versão instalada pelo gerenciador de
+# pacotes — o gsd-check-update compara a versão declarada em cada hook com o
+# VERSION local e acusaria "stale hooks" em máquinas com outra versão do GSD.
 DIRS=(
     claude/skills/coolify:.claude/skills/coolify
-    claude/hooks:.claude/hooks
 )
 
 for entry in "${DIRS[@]}"; do
