@@ -1,0 +1,7 @@
+# Nunca versionar segredos
+.config/coolify/
+coolify/env
+*.token
+*.pem
+*_rsa
+.env
