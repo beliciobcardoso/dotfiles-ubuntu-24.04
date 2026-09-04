@@ -5,6 +5,28 @@ Este repositório contém meus **dotfiles** (configurações do bash, zsh, vim, 
 
 ---
 
+## ✅ Pré-requisitos de sistema
+
+Antes de clonar e rodar o `setup.sh`, instale numa máquina nova:
+
+```bash
+sudo apt update && sudo apt install -y git zsh curl wget
+```
+
+| Ferramenta | Por quê |
+| --- | --- |
+| `git` | Necessário para clonar este repositório e para o `oh-my-zsh` (usado abaixo) |
+| `zsh` | Shell alvo do `zsh/.zshrc`; o `.zshrc` referencia `$ZSH="$HOME/.oh-my-zsh"` |
+| `curl` / `wget` | Usados pelo instalador do Oh My Zsh |
+
+Instale o [Oh My Zsh](https://ohmyz.sh/) (o `.zshrc` deste repo espera `~/.oh-my-zsh` já instalado):
+
+```bash
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+---
+
 ## 🚀 Como usar
 
 Clone o repositório:
