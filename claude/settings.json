@@ -8,7 +8,7 @@
       "mcp__pencil"
     ]
   },
-  "model": "opus",
+  "model": "sonnet[1m]",
   "hooks": {
     "SessionStart": [
       {
@@ -89,7 +89,44 @@
     }
   },
   "language": "pt-br",
-  "effortLevel": "low",
+  "effortLevel": "medium",
   "tui": "fullscreen",
-  "skipWorkflowUsageWarning": true
+  "skipWorkflowUsageWarning": true,
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: PUBLIC — beliciobcardoso/OmniRoute (per gh: Visibility: public)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: STORAGE_ENCRYPTION_KEY / JWT_SECRET / API_KEY_SECRET via .env (never committed); credentials encrypted at rest (AES-256-GCM) per CLAUDE.md; CI secrets referenced by name only (BRANCH_LOCK_TOKEN, CLAUDE_CODE_OAUTH_TOKEN, CODECOV_TOKEN, DOCKERHUB_TOKEN, DOCKERHUB_USERNAME, GITHUB_TOKEN, NPM_TOKEN, PROMPTFOO_PROVIDER_KEY, SONAR_HOST_URL, SONAR_TOKEN, TRUNK_TOKEN, VPS_HOST, VPS_SSH_KEY, VPS_USER) — values not gathered",
+      "**Default / protected branches**: main (default); release/vX.Y.Z branches used as active development targets per CLAUDE.md release-freeze workflow; gh reports no rulesets and no protected branches listed for beliciobcardoso/OmniRoute",
+      "**CI/CD deploy targets**: production VPS at root@192.168.0.15 (per CLAUDE.md hard rule #18/#2); docker-compose.prod.yml present in repo",
+      "**Network posture**: None configured",
+      "**Source control**: This repo (beliciobcardoso/OmniRoute, public fork) and its remotes — origin https://github.com/beliciobcardoso/OmniRoute.git, upstream https://github.com/diegosouzapw/OmniRoute.git (read-only reference upstream; this repo's own work only is safe to push given public visibility)",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: production VPS 192.168.0.15 (root@192.168.0.15) referenced in CLAUDE.md as the live-test/deploy target",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: credentials/secrets files and modules — .env, .env.example (template only), .env.homolog.example, src/lib/db/secrets.ts, src/lib/cloudAgent/credentials.ts, src/lib/oauth/credentialBlob.ts, src/lib/zed-oauth/credentialFingerprint.ts, src/shared/utils/secretsValidator.ts, src/lib/guardrails/piiMasker.ts, src/lib/piiSanitizer.ts, src/lib/inspector/secretMask.ts, open-sse/config/credentialLoader.ts, open-sse/services/credentialGate.ts, scripts/check/check-secrets.mjs, scripts/check/lib/allowlist.mjs; PII handling is opt-in-only (never mutate by default) per CLAUDE.md hard rule #20; share only with audiences cleared at the named+specifics bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: production VPS root@192.168.0.15; any namespace/host/container carrying prod or production as a whole name segment; docker-compose.prod.yml",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic (production VPS 192.168.0.15, prod/production-named namespaces)",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries prod or production as a whole word or name segment; docker-compose.prod.yml",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development on OmniRoute (AI proxy/router) — this repo only",
+      "**Trusted repo**: /home/belicio-cardoso/Projetos/OmniRoute (beliciobcardoso/OmniRoute, public) and its remotes origin (beliciobcardoso/OmniRoute) and upstream (diegosouzapw/OmniRoute, read-only reference); since the repo is public, only this repo's own work is safe to push there — content ported or first read from outside this session's repo is not its own work",
+      "**Org-specific CLIs**: rtk (RTK compression CLI, seen in project transcript 1× and shell history 43×) — routine under this project",
+      "any \"routine under <user>/ prefix\" qualifiers: none found — CLAUDE.md worktree rule requires all development work under .claude/worktrees/<task> inside this repo, never the shared main checkout"
+    ],
+    "allow": [
+      "$defaults",
+      "Bash(npx:*) in /home/belicio-cardoso/Projetos/OmniRoute — routine dev-script runner, seen 12× in project transcript and 34× in shell history, not a raw interpreter/shell prefix"
+    ],
+    "soft_deny": [
+      "$defaults",
+      "Bash(git stash*) in /home/belicio-cardoso/Projetos/OmniRoute — CLAUDE.md hard rule #22a bans git stash/stash pop anywhere in this repo, including worktrees, due to shared-object-store clobber risk",
+      "Deploys or SSH writes targeting root@192.168.0.15 (the production VPS) or docker-compose.prod.yml — CLAUDE.md hard rule #18/#21 treats this as a sensitive real-environment target requiring explicit documented validation"
+    ]
+  }
 }

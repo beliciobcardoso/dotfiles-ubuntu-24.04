@@ -5,24 +5,13 @@ Este repositório contém meus **dotfiles** (configurações do bash, zsh, vim, 
 
 ---
 
-## ✅ Pré-requisitos de sistema
+## ✅ Pré-requisito de sistema
 
-Antes de clonar e rodar o `setup.sh`, instale numa máquina nova:
-
-```bash
-sudo apt update && sudo apt install -y git zsh curl wget
-```
-
-| Ferramenta | Por quê |
-| --- | --- |
-| `git` | Necessário para clonar este repositório e para o `oh-my-zsh` (usado abaixo) |
-| `zsh` | Shell alvo do `zsh/.zshrc`; o `.zshrc` referencia `$ZSH="$HOME/.oh-my-zsh"` |
-| `curl` / `wget` | Usados pelo instalador do Oh My Zsh |
-
-Instale o [Oh My Zsh](https://ohmyz.sh/) (o `.zshrc` deste repo espera `~/.oh-my-zsh` já instalado):
+O único pré-requisito manual é o `git`, necessário para clonar este repositório
+(o `setup.sh` cuida do resto — veja a seção abaixo):
 
 ```bash
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo apt update && sudo apt install -y git
 ```
 
 ---
@@ -49,6 +38,23 @@ chmod +x setup.sh
 
 O `setup.sh` cria **links simbólicos** do `$HOME` para os arquivos deste repositório.
 Qualquer arquivo já existente no destino é preservado como `<arquivo>.backup`.
+
+---
+
+## 🔧 O que o `setup.sh` instala automaticamente
+
+Antes de criar os symlinks, o script verifica e instala (pulando o que já
+existir, então rodar de novo é seguro) tudo que `zsh/.zshrc` espera encontrar.
+Os passos via `apt` pedem sua senha de `sudo` durante a execução.
+
+| Dependência | Instalada via | Por quê |
+| --- | --- | --- |
+| `zsh` | `apt` | Shell alvo do `zsh/.zshrc` |
+| Oh My Zsh (`~/.oh-my-zsh`) | instalador oficial (`RUNZSH=no CHSH=no KEEP_ZSHRC=yes`, não troca seu shell padrão nem abre sessão no meio do script) | `.zshrc` referencia `$ZSH="$HOME/.oh-my-zsh"` |
+| `fzf`, `direnv` | `apt` | Plugin `fzf` e `eval "$(direnv hook zsh)"` do `.zshrc` |
+| `zsh-syntax-highlighting`, `zsh-autosuggestions` | `git clone` em `~/.oh-my-zsh/custom/plugins/` | Listados em `plugins=(...)` no `.zshrc` |
+| rustup/cargo (`~/.cargo/env`) | instalador oficial (`sh.rustup.rs`) | `.zshrc` faz `source $HOME/.cargo/env` |
+| uv (`~/.local/bin/env`) | instalador oficial (`astral.sh/uv`) | `.zshrc` faz `. $HOME/.local/bin/env` |
 
 ---
 
